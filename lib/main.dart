@@ -1,100 +1,150 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(HesapMakinesi());
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class HesapMakinesi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      debugShowCheckedModeBanner: false,
+      title: "HesapMakinesi",
+      home: Iskele(),
     );
   }
 }
 
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
+class Iskele extends StatelessWidget {
+   @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Hesap Makinesi"),
+        backgroundColor: Colors.black54,
+        centerTitle: true,
+      ),
+      body: AnaEkran(),
+    );
+  }
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class AnaEkran extends StatefulWidget {
+  @override
+  _AnaEkranState createState() => _AnaEkranState();
+}
 
-  void _incrementCounter() {
+class _AnaEkranState extends State<AnaEkran> {
+  num s1, s2, sonuc;
+  TextEditingController t1 = TextEditingController();
+  TextEditingController t2 = TextEditingController();
+
+  sayiTopla() {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+      s1 = num.parse(t1.text);
+      s2 = num.parse(t2.text);
+      sonuc = s1 + s2;
+    });
+  }
+
+  sayiCikar() {
+    setState(() {
+      s1 = num.parse(t1.text);
+      s2 = num.parse(t2.text);
+      sonuc = s1 - s2;
+    });
+  }
+
+  sayiCarp() {
+    setState(() {
+      s1 = num.parse(t1.text);
+      s2 = num.parse(t2.text);
+      sonuc = s1 * s2;
+    });
+  }
+
+  sayiBol() {
+    setState(() {
+      s1 = num.parse(t1.text);
+      s2 = num.parse(t2.text);
+      sonuc = s1 / s2;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+    return Container(
+      margin: EdgeInsets.all(50),
+      child: Center(
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+          children: [
+            Container(
+                margin: EdgeInsets.all(20),
+                color: Colors.black45,
+                width: 1000,
+                height: 50,
+                child: Center(
+                  child: Text(" İşlemin Sonucu: $sonuc",
+                 style: TextStyle(
+                   color: Colors.white,), ),
+                ),
+                ),
+            TextField(
+              controller: t1,
+              // obscureText: true, ----> şifre olmuş olsaydı görünmemmesi için kullanırdım.
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: '1.Sayı',
+              ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            TextField(
+              controller: t2,
+              //  obscureText: true,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: '2.Sayı',
+              ),
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: RaisedButton(
+                    onPressed: sayiTopla,
+                    child: Text("Toplama"),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: RaisedButton(
+                    onPressed: sayiCikar,
+                    child: Text("Çıkarma"),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: RaisedButton(
+                    onPressed: sayiCarp,
+                    child: Text("Çarpma"),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: RaisedButton(
+                    onPressed: sayiBol,
+                    child: Text("Bölme"),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
+ 
