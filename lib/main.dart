@@ -21,7 +21,7 @@ class Iskele extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Hesap Makinesi"),
-        backgroundColor: Colors.black54,
+        backgroundColor: Colors.blue[600],
         centerTitle: true,
       ),
       body: AnaEkran(),
@@ -80,7 +80,7 @@ class _AnaEkranState extends State<AnaEkran> {
           children: [
             Container(
                 margin: EdgeInsets.all(20),
-                color: Colors.black45,
+                color: Colors.blue,
                 width: 1000,
                 height: 50,
                 child: Center(
@@ -109,16 +109,16 @@ class _AnaEkranState extends State<AnaEkran> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(20.0),
-                  child: RaisedButton(
+                  child: ElevatedButton(
                     onPressed: sayiTopla,
-                    child: Text("Toplama"),
+                    child: Text("+", style: TextStyle(fontSize: 20),),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(20.0),
-                  child: RaisedButton(
+                  child: ElevatedButton(
                     onPressed: sayiCikar,
-                    child: Text("Çıkarma"),
+                    child: Text("-", style: TextStyle(fontSize: 20),),
                   ),
                 ),
               ],
@@ -127,16 +127,16 @@ class _AnaEkranState extends State<AnaEkran> {
               children: [
                 Padding(
                   padding: EdgeInsets.all(20.0),
-                  child: RaisedButton(
+                  child:  ElevatedButton(
                     onPressed: sayiCarp,
-                    child: Text("Çarpma"),
+                    child: Text("x", style: TextStyle(fontSize: 20),),
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.all(20.0),
-                  child: RaisedButton(
+                  child: ElevatedButton(
                     onPressed: sayiBol,
-                    child: Text("Bölme"),
+                    child: Text("/", style: TextStyle(fontSize: 20),),
                   ),
                 ),
               ],
